@@ -43,17 +43,28 @@
     }
   }
 
-  [natural = 'mud'][zoom >= 13]::natural {
+  [natural = 'mud'][zoom >= 13]::surface,
+  [surface = 'mud'][zoom >= 13]::surface
+  {
     polygon-pattern-file: url('symbols/mud.png');
+    polygon-pattern-opacity: 0.5;
   }
-}
 
-#water-areas-overlay {
-  [natural =~ '(marsh|wetland)'] {
-    [zoom >= 13] {
-      polygon-pattern-file: url('symbols/marsh.png');
-    }
+  [natural = 'sand'][zoom >= 13]::surface,
+  [surface = 'sand'][zoom >= 13]::surface,
+  [surface = 'gravel'][zoom >= 13]::surface
+  {
+    polygon-pattern-file: url('symbols/beach.png');
+    polygon-pattern-opacity: 0.5;
   }
+
+  [natural = 'bare_rock'][zoom >= 13]::surface,
+  [surface = 'rocky'][zoom >= 13]::surface
+  {
+    polygon-pattern-file: url('symbols/fr/rocky_overlay.png');
+    polygon-pattern-opacity: 0.5;
+  }
+
 }
 
 #glaciers-text [zoom >= 8] {
@@ -143,7 +154,7 @@
   [waterway = 'stream'],
   [waterway = 'ditch'],
   [waterway = 'drain'] {
-    [zoom >= 13][zoom < 15] {
+    [zoom >= 13][zoom <= 14] {
       line-width: 1;
       line-color: @water-color;
     }

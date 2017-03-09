@@ -7,29 +7,25 @@
   [zoom>=13][admin_level<=8],
   [zoom>=15] /* limites administratives locales (élément de relation) */
   {
-    [zoom>=15][zoom<18][nom!=''] { text-name: "[nom]"; }
-    [admin_level=7][insee!=''] /* traitement spécifique des noms d'arrondissements */
-    {
-   	text-name: '      '+[name]+' (arrond.)      ';
-    }
-    text-name: '      '+[name]+'      ';
+    //[zoom>=15][zoom<18][nom!=''] { text-name: "[nom]"; }
+    [admin_level=7][insee!=''] { text-name: [name]+' (arr.)'; }
+    [admin_level=6][insee!=''] { text-name: [name]+' (dép.)'; }
+    [admin_level=4][insee!=''] { text-name: [name]+' (rég.)'; }
+    text-name: [name];
     text-fill: @admin-boundaries;
     text-size: 10;
     text-placement: line;
     text-face-name: @oblique-fonts;
     text-halo-radius: 1.5;
     text-halo-fill: fadeout(white, 30%);
-    text-min-padding: 50;
-    text-min-distance: 50;
-    text-max-char-angle-delta: 10;
+    text-max-char-angle-delta: 15;
     text-dy: 4;
-    text-spacing: 500;
+    text-spacing: 750;
   }
 }
 
 
 #admin-boundaries [zoom>=11] {
-
   background/line-color: white;
   background/line-width: 0;
   comp-op: darken;
@@ -71,7 +67,6 @@
   [admin_level = '5'],
   [admin_level = '6'] {
     [nb>=2]{
-      line-color: @admin-boundary-line;
       line-width: 2;
       background/line-width: 2;
       line-dasharray: 6,4,0.1,4;
@@ -88,7 +83,6 @@
   [admin_level = '7'],
   [admin_level = '8'] {
     [zoom >= 12] {
-      line-color: @admin-boundary-line;
       line-width: 1.5;
       background/line-width: 1.5;
       line-dasharray: 5,4;
@@ -104,7 +98,6 @@
 
   [admin_level = '9'] {
     [zoom >= 12] {
-      line-color: @admin-boundary-line;
       line-width: 1.5;
       background/line-width: 1.5;
       line-dasharray: 3,6;
@@ -113,7 +106,6 @@
 
   [admin_level = '10'] {
     [zoom >= 15] {
-      line-color: @admin-boundary-line;
       line-width: 1.5;
       background/line-width: 1.5;
       line-dasharray: 1,6;
